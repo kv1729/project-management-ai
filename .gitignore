@@ -59,6 +59,9 @@ cover/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+backend/data/
+*.db-wal
+*.db-shm
 
 # Flask stuff:
 instance/
@@ -174,3 +177,6 @@ cython_debug/
 
 .DS_Store
 
+
+# Playwright test artifacts
+frontend/test-results/

@@ -1,0 +1,16 @@
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_PATH: /data/project-management.db
+    volumes:
+      - app-data:/data
+    env_file:
+      - path: .env
+        required: false
+
+volumes:
+  app-data:
