@@ -8,7 +8,7 @@ export default defineConfig({
   },
   use: {
     baseURL: process.env.BASE_URL ?? "http://127.0.0.1:3000",
-    channel: process.env.BROWSER_CHANNEL,
+    channel: process.env.BROWSER_CHANNEL ?? "chrome",
     launchOptions: {
       executablePath: process.env.PLAYWRIGHT_EXECUTABLE_PATH,
     },

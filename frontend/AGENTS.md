@@ -53,7 +53,7 @@ Test behavior at the closest useful boundary:
 
 - Keep pure Kanban state and movement logic covered with focused unit tests, including invalid IDs, same-column moves, cross-column moves, and drops on columns.
 - Test component workflows through accessible labels and roles: renaming columns, adding valid cards, rejecting blank titles, cancelling forms, and deleting cards.
-- Keep Playwright tests for user-visible flows that cross the rendered application boundary, including loading the board and drag-and-drop behavior.
+- Keep Playwright tests for user-visible flows that cross the rendered application boundary, including loading the board and drag-and-drop behavior. They run in the installed Google Chrome by default (`BROWSER_CHANNEL` and `PLAYWRIGHT_EXECUTABLE_PATH` override this), so no Playwright browser download is required.
 - Mock network and AI services in frontend tests once those integrations are introduced; do not make real OpenRouter calls from automated tests.
 - Maintain a minimum of 80% statements, branches, functions, and lines coverage for the applicable frontend test run.
 

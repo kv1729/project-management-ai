@@ -69,12 +69,18 @@ $env:BASE_URL = "http://localhost:8000"
 npm run test:e2e
 ```
 
-Playwright requires a compatible Chromium runtime. If its managed Chromium installation is incomplete or corrupted, close Chrome and Playwright processes, remove the incomplete version under `$env:LOCALAPPDATA\ms-playwright`, and reinstall with `npx playwright install chromium` and, when requested by the installed Playwright version, `npx playwright install chromium-headless-shell`. If extraction remains incomplete but a local Chromium executable is available, set `PLAYWRIGHT_EXECUTABLE_PATH` to its full path before running the suite. This path is an environment-specific recovery option and is not part of the application runtime.
+Playwright runs the suite in the locally installed Google Chrome (`channel: "chrome"` in `frontend/playwright.config.ts`), so Chrome must be installed and no `npx playwright install` download is needed. Two environment variables override this:
+
+- `BROWSER_CHANNEL` selects a different installed browser channel, for example `msedge`, or `chromium` to use Playwright's managed Chromium (which then requires `npx playwright install chromium`).
+- `PLAYWRIGHT_EXECUTABLE_PATH` points at a specific browser executable, for example a Chrome installed in a non-standard location.
+
+Both are environment-specific options and are not part of the application runtime.
 
 ### Platform Limitations
 
 - Docker-dependent commands require Docker Desktop and its Linux engine.
 - Windows PowerShell commands were verified in this environment. macOS/Linux scripts are documented but were not executable here.
+- Playwright's managed Chromium download hung during extraction on the Windows development machine (Playwright 1.58.0, Node 24.16.0, Seqrite Endpoint Protection installed): the download completed but extraction stalled after three files, while the same archive extracted normally with Windows `tar`. The suite therefore targets the installed Google Chrome by default.
 - The real OpenRouter connectivity check requires a configured key and network access; ordinary automated tests remain offline and mocked.
 
 ## Part 1: Plan and Frontend Guide
@@ -325,10 +331,10 @@ Playwright requires a compatible Chromium runtime. If its managed Chromium insta
 
 ## Final MVP Gate
 
-- [ ] Run the complete documented unit, integration, browser, lint, build, and coverage checks.
-- [ ] Verify the container starts from a clean environment with only documented configuration.
-- [ ] Verify the database and API preserve board state across restart.
-- [ ] Verify sign-in, board editing, AI chat, and AI-driven updates end to end.
-- [ ] Record any known limitations in the README or `docs/`.
+- [x] Run the complete documented unit, integration, browser, lint, build, and coverage checks.
+- [x] Verify the container starts from a clean environment with only documented configuration.
+- [x] Verify the database and API preserve board state across restart.
+- [x] Verify sign-in, board editing, AI chat, and AI-driven updates end to end.
+- [x] Record any known limitations in the README or `docs/`.
 
 The reproducible setup and verification procedures above are prerequisites for this gate. The known limitations to carry into the gate are the platform-specific script coverage and the opt-in nature of the real OpenRouter check.

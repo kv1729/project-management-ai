@@ -63,7 +63,7 @@ Authenticated clients can send a question to `POST /api/ai/board` with the beare
 
 ## Frontend Browser Tests
 
-Run the browser suite against the Docker-served app with `BASE_URL=http://localhost:8000`. If Playwright's managed browser is installed normally, no additional setting is needed. When using an extracted local Chromium executable, set `PLAYWRIGHT_EXECUTABLE_PATH` to its full path before running `npm run test:e2e`.
+Run the browser suite against the Docker-served app with `BASE_URL=http://localhost:8000`. The suite runs in your installed Google Chrome, so Chrome is a prerequisite and no Playwright browser download is needed. To use another browser, set `BROWSER_CHANNEL` (for example `msedge`, or `chromium` after `npx playwright install chromium`); to use a specific executable, set `PLAYWRIGHT_EXECUTABLE_PATH` to its full path. Set either before running `npm run test:e2e`.
 
 After signing in, the frontend loads the board from `GET /api/board` and saves edits through `PUT /api/board`. Rename, add, delete, and drag-and-drop changes are persisted; refreshing the page restores the saved board.
 
